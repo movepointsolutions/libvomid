@@ -56,14 +56,33 @@ vmd_ ## type ## _destroy(vmd_ ## type ## _t *o) \
 #define VMD_MAX_TIME INT_MAX
 #define VMD_MAX_PITCH SHRT_MAX
 
+enum {
+	VMD_VOICE_NOTEOFF = 0x80,
+	VMD_VOICE_NOTEON  = 0x90,
+	VMD_VOICE_NOTEAFTERTOUCH = 0xA0,
+	VMD_VOICE_CONTROLLER = 0xB0,
+	VMD_VOICE_PROGRAM = 0xC0,
+	VMD_VOICE_CHANNELPRESSURE = 0xD0,
+	VMD_VOICE_PITCHWHEEL = 0xE0,
+
+	VMD_META_TRACKNAME = 0x03,
+	VMD_META_EOT = 0x2F,
+	VMD_META_PROPRIETARY = 0x7f,
+
+	VMD_CTRL_CONTROLLERS_OFF = 121,
+	VMD_CTRL_NOTES_OFF = 123,
+};
+
 typedef int vmd_time_t;
 typedef short vmd_pitch_t;
 typedef signed char vmd_midipitch_t;
 typedef signed char vmd_velocity_t;
 
+#define VMD_DRUMCHANNEL 9
+
 typedef uint16_t vmd_chanmask_t;
 #define VMD_CHANMASK_ALL ((uint16_t)0xFFFF)
-#define VMD_CHANMASK_DRUMS ((uint16_t)(1 << 9))
+#define VMD_CHANMASK_DRUMS ((uint16_t)(1 << VMD_DRUMCHANNEL))
 #define VMD_CHANMASK_NODRUMS (VMD_CHANMASK_ALL & ~VMD_CHANMASK_DRUMS)
 
 #define VMD_TEMPO_MIDI(bpm) (60 * 1000000 / (bpm))
@@ -413,5 +432,11 @@ void            vmd_flush_output(void);
 #ifdef __cplusplus
 } // extern "C"
 #endif
+#define VMD_VOICE_NOTEOFF 0x80
+#define VMD_VOICE_NOTEON  0x90
+#define VMD_VOICE_AFTERTOUCH 0xA0
+#define VMD_VOICE_CONTROLLER 0xB0
+#define VMD_VOICE_PROGRAM 0xC0
+#define VMD_VOICE_CHANPRESSURE 0xD0
 
 #endif /* VOMID_H_INCLUDED */

@@ -65,7 +65,9 @@ if (HAL_WIN32)
 endif ()
 
 add_executable (play examples/play.c)
+add_executable (drum-machine examples/drum-machine.c)
 target_link_libraries (play libvomid)
+target_link_libraries (drum-machine libvomid)
 
 include (CTest)
 enable_testing()
