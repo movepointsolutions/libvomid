@@ -41,7 +41,9 @@ static void
 beat()
 {
 	static const int b = VMD_VOICE_NOTEON + VMD_DRUMCHANNEL;
-	unsigned char o[3] = {b, 35, 100};
+	static int x = 0;
+	x = (x + 1) % 2;
+	unsigned char o[3] = {b, 35 + x, 100};
 	vmd_output(o, sizeof(o));
 	vmd_flush_output();
 }
